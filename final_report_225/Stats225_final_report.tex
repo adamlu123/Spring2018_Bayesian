@@ -1,0 +1,125 @@
+\documentclass{article}
+
+
+
+\usepackage[final]{nips_2017}
+\usepackage{graphicx}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+\title{Stats 225 Final Report}
+
+% \usepackage{nips15submit_e,mathtools, graphicx,amsmath,amsthm, amssymb,epstopdf,verbatim,array,booktabs,mathtools}  
+% \usepackage{tikz}
+
+\usepackage{algpseudocode,algorithm,algorithmicx}  
+\newcommand*\DNA{\textsc{dna}}
+
+\newcommand*\Let[6]{\State #1 $\gets$ #2}  
+\algrenewcommand\algorithmicrequire{\textbf{Precondition:}}  
+\algrenewcommand\algorithmicensure{\textbf{Postcondition:}}
+
+%
+
+\author{
+  Yadong Lu\\
+  %\thanks{Use footnote for providing further
+    % information about author (webpage, alternative
+    % address)---\emph{not} for acknowledging funding agencies.} \\
+  Department of Statistics\\
+  University of California, Irvine\\
+  Irvine, CA 92617 \\
+  \texttt{yadongl1@uci.edu} \\
+  %% examples of more authors
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \AND
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+}
+
+\begin{document}
+% \nipsfinalcopy is no longer used
+
+\maketitle
+\section*{Problem 1: Spike and Slab Regression}
+
+
+\subsection*{Part 1}
+Below is the pseudo code for implementing SSVS.
+
+\begin{algorithm}[H]
+  \caption{Gibbs sampling steps for SSVS, George \& McCullogh (1993)
+    \label{alg:packed-dna-hamming}}  
+  \begin{algorithmic}[]  
+    % \Require{$x$ and $y$ are packed \DNA strings of equal length $n$}  
+    \Statex 
+    Set appropriate value for $\tau_{i}, c_{i}; R, v_{\gamma}; \lambda_{\gamma}; p_{i}$ \\
+    \textbf{Initialize:} $\beta^{0}, \sigma^{0}, \gamma^{0}$ \\
+    Gibbs Steps: 
+    \For{$i$ from 1 to $N$}
+    \\
+     \hspace{0.1in} Sample $\beta^{j} \sim f(\beta^{j}| Y, \sigma^{j-1}, \gamma^{j-1})= N_{p}(A_{\gamma^{j-1}} (\sigma^{j-1})^{-2} X'X \hat{\beta}_{LS}, A_{\gamma^{j-1}} )$, where $A_{\gamma^{j-1}} = ((\sigma^{j-1})^{-2}X'X + D^{-1}_{\gamma^{j-1}} R^{-1}D^{-1}_{\gamma^{j-1}}  )^{-1}$ \\
+     \hspace{0.1in} Sample $\sigma^{j} \sim f(\sigma^{j}|Y, \beta^{j}, \gamma^{j-1}) = IG(\frac{n+v_{\gamma^{j-1}}}{2}, \frac{|Y-X\beta^{j}|^{2}+v_{\gamma^{j-1}}\lambda_{\gamma^{j-1}}  }{2})  $ \\
+     \hspace{0.1in} Sample $\gamma^{j}_{i} \sim f( \gamma^{j}_{i} | Y, \beta^{j}, \sigma^{j}, \gamma^{j}(i) ) = f(\gamma^{j}_{i}|\beta^{j}, \sigma^{j}, \gamma^{j}(i)) $
+    \EndFor
+    % \Function{Distance}{$x, y$}  
+    %   \Let{$z$}{$x \oplus y$} \Comment{$\oplus$: bitwise exclusive-or}  
+    %   \Let{$\delta$}{$0$}  
+    %   \For{$i \gets 1 \textrm{ to } n$}  
+    %     \If{$z_i \neq 0$}  
+    %       \Let{$\delta$}{$\delta + 1$}  
+    %     \EndIf  
+    %   \EndFor  
+    %   \State \Return{$\delta$}  
+    % \EndFunction  
+  \end{algorithmic}  
+\end{algorithm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
