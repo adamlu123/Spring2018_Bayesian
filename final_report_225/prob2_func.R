@@ -1,7 +1,7 @@
 update_beta <- function(sig2,gamma,   X=X,R=diag(1,n),beta.LS=beta.LS,tau=tau,c=c){
   diagnoal <- ( (gamma==rep(0,n)) +(gamma==rep(1,n))*c ) * tau
   inv_D <- diag(1/diagnoal)
-  A = solve(sig2^(-1)*t(X)%*%X+ inv_D%*%diag(1,n)%*%inv_D )
+  A = solve( sig2^(-1)*t(X)%*%X+ inv_D%*%diag(1,n)%*%inv_D )
   mu <- A%*%t(X)%*%X%*%beta.LS/sig2
   beta.i <- mvrnorm(n = 1, mu, A)
   return(beta.i)
@@ -10,7 +10,7 @@ update_beta <- function(sig2,gamma,   X=X,R=diag(1,n),beta.LS=beta.LS,tau=tau,c=
 # update_beta(sig2,gamma,   X=X,R=diag(1,n),beta.LS=beta.LS,tau=tau,c=c)
 update_sig2 <- function(beta.i){
   SSE <- sum(resid(fit)^2)
-  sig2.i <- rinvgamma(1,(50+0)/2, SSE/2)
+  sig2.i <- rinvgamma(1, (50+0)/2, SSE/2)
   return(sig2.i)
 }
 # update_sig2(beta.i)
