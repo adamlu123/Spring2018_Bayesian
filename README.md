@@ -2,5 +2,6 @@
 
 This is a archive for Spring 2018 course:
 
-Stats 225
-Stats 226
+Stats 225: Bayesian Data Analysis.
+
+Stats 226: Nonparametric Bayesian Statistics.
